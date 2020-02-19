@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {NumberTrivia} from './features/number_trivia/domain/entities/number_trivia';
 import {select, Store} from '@ngrx/store';
-import {NumberTriviaGet} from './features/number_trivia/presentation/ngrx/number_trivia_actions';
 import {Observable} from 'rxjs';
-import {selectNumberTrivia} from './features/number_trivia/presentation/ngrx/number_trivia_selectors';
 import {State} from './ngrx/app.reducers';
+import {Trivia} from './features/trivia/domain/entities/trivia';
+import {TriviaGet} from './features/trivia/presentation/ngrx/trivia_actions';
+import {selectTrivia} from './features/trivia/presentation/ngrx/trivia_selectors';
+import {TriviaService} from './features/trivia/presentation/ngrx/trivia.service';
 
 @Component({
   selector: 'app-root',
@@ -12,13 +13,13 @@ import {State} from './ngrx/app.reducers';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  numberTrivia$: Observable<NumberTrivia>;
+  trivia$: Observable<Trivia>;
 
-  constructor(private store: Store<State>) {
+  constructor(private triviaService: TriviaService) {
   }
 
-  async ngOnInit() {
-    this.store.dispatch(NumberTriviaGet());
-    this.numberTrivia$ = this.store.pipe(select(selectNumberTrivia));
+  ngOnInit() {
+    this.triviaService.getRandomTrivia();
+    this.trivia$ = this.triviaService.trivia$;
   }
 }

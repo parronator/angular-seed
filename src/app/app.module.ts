@@ -4,25 +4,22 @@ import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
-import {GetRandomNumberTriviaUsecase} from './features/number_trivia/domain/usecases/get_random_number_trivia_usecase';
-import {NumberTriviaRepository} from './features/number_trivia/domain/repositories/number_trivia_repository';
-import {NumberTriviaRepositoryImpl} from './features/number_trivia/data/repositories/number_trivia_repository_impl';
-import {
-  NumberTriviaRemoteDataSource,
-  NumberTriviaRemoteDataSourceImpl
-} from './features/number_trivia/data/datasources/number_trivia_remote_data_source';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {environment} from '../environments/environment';
 import {EffectsModule} from '@ngrx/effects';
 import {effects} from './ngrx/app.effects';
 import {StoreModule} from '@ngrx/store';
 import {reducers, metaReducers} from './ngrx/app.reducers';
-import {NumberTriviaExampleComponent} from './features/number_trivia/presentation/components/number-trivia-example/number-trivia-example.component';
+import {TriviaExampleComponent} from './features/trivia/presentation/components/trivia-example/trivia-example.component';
+import {TriviaGetRandomUsecase} from './features/trivia/domain/usecases/trivia_get_random_usecase';
+import {TriviaRepository} from './features/trivia/domain/repositories/trivia_repository';
+import {TriviaRepositoryImpl} from './features/trivia/data/repositories/trivia_repository_impl';
+import {TriviaRemoteDataSource, TriviaRemoteDataSourceImpl} from './features/trivia/data/datasources/trivia_remote_data_source';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NumberTriviaExampleComponent
+    TriviaExampleComponent
   ],
   imports: [
     BrowserModule,
@@ -40,9 +37,9 @@ import {NumberTriviaExampleComponent} from './features/number_trivia/presentatio
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   providers: [
-    GetRandomNumberTriviaUsecase,
-    {provide: NumberTriviaRepository, useClass: NumberTriviaRepositoryImpl},
-    {provide: NumberTriviaRemoteDataSource, useClass: NumberTriviaRemoteDataSourceImpl}
+    TriviaGetRandomUsecase,
+    {provide: TriviaRepository, useClass: TriviaRepositoryImpl},
+    {provide: TriviaRemoteDataSource, useClass: TriviaRemoteDataSourceImpl},
   ],
   bootstrap: [AppComponent]
 })

@@ -1,3 +1,3 @@
-import {NumberTriviaEffects} from '../features/number_trivia/presentation/ngrx/number_trivia_effects';
+import {TriviaEffects} from '../features/trivia/presentation/ngrx/trivia_effects';
 
-export const effects = [NumberTriviaEffects];
+export const effects = [TriviaEffects];

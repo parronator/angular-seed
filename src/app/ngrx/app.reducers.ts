@@ -3,16 +3,14 @@ import {
   MetaReducer,
 } from '@ngrx/store';
 import {environment} from '../../environments/environment';
-import {numberTriviaReducer} from '../features/number_trivia/presentation/ngrx/number_trivia_reducers';
+import {triviaReducer} from '../features/trivia/presentation/ngrx/trivia_reducers';
 
 export interface State {
-  numberTrivia;
+  trivia;
 }
 
 export const reducers: ActionReducerMap<State> = {
-  numberTrivia: numberTriviaReducer,
+  trivia: triviaReducer
 };
 
 export const metaReducers: MetaReducer<State>[] = !environment.production ? [] : [];
-
-
